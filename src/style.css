@@ -201,12 +201,60 @@ body {
   cursor: pointer;
 }
 #gunMan-container {
+  left: 10dvw;
+  top: 16dvw;
+  transform: translateX(-50%);
+  transform: translateY(50%);
+  transition: transform 0.2s ease;
+  height: 80px;
+}
+#knight-container {
   left: 20dvw;
   top: 15dvw;
   transform: translateX(-50%);
   transform: translateY(50%);
   transition: transform 0.2s ease;
   height: 80px;
+}
+#newspaper-container {
+  right: 25dvw;
+  bottom: 3dvw;
+  transform: translateX(-50%);
+  transform: translateY(50%);
+  transition: transform 0.2s ease;
+  height: 30px;
+}
+#stones-container {
+  right: 30dvw;
+  bottom: 5dvw;
+  transform: translateX(-50%);
+  transform: translateY(50%);
+  transition: transform 0.2s ease;
+  height: 30px;
+}
+#starfish-container {
+  right: 30dvw;
+  bottom: 20dvw;
+  transform: translateX(-50%);
+  transform: translateY(50%);
+  transition: transform 0.2s ease;
+  height: 40px;
+}
+#shells-container {
+  right: 45dvw;
+  bottom: 10dvw;
+  transform: translateX(-50%);
+  transform: translateY(50%);
+  transition: transform 0.2s ease;
+  height: 40px;
+}
+#fisher-container {
+  right: 34dvw;
+  bottom: 25dvw;
+  transform: translateX(-50%);
+  transform: translateY(50%);
+  transition: transform 0.2s ease;
+  height: 130px;
 }
 
 /* Dialogue bubble styles */
@@ -344,6 +392,157 @@ body {
     transform: scale(0);
   }
   40% {
+    transform: scale(1);
+  }
+}
+
+/* Story Teller Styles */
+.story-teller-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100dvw;
+  height: 100dvh;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  animation: fadeIn 0.3s ease;
+}
+.story-teller-container {
+  width: 100%;
+  height: fit-content;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.character-left,
+.character-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.character-left {
+  left: 0;
+  transform: translateX(-10%);
+}
+
+.character-right {
+  right: 0;
+  transform: translateX(10%);
+}
+
+.character-image {
+  height: 200px;
+  overflow: hidden;
+  border: 4px solid transparent;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.character-image.active {
+  border-color: #f39c12;
+  box-shadow: 0 0 20px rgba(243, 156, 18, 0.5);
+  transform: scale(1.05);
+}
+
+.character-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.story-character-container {
+  display: flex;
+  justify-content: space-between;
+}
+.dialogue-box {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.9);
+  padding: 10px;
+  border-top: 3px solid #f39c12;
+}
+
+.dialogue-content {
+  margin-bottom: 20px;
+}
+
+.speaker-name {
+  color: #f39c12;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.dialogue-text {
+  color: white;
+  font-size: 18px;
+  line-height: 1.6;
+  max-height: 120px;
+  overflow-y: auto;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  border-left: 4px solid #f39c12;
+}
+
+.dialogue-controls {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.skip-btn,
+.next-btn {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.skip-btn {
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+  color: white;
+}
+
+.skip-btn:hover {
+  background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+}
+
+.next-btn {
+  background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+  color: white;
+}
+
+.next-btn:hover {
+  background: linear-gradient(135deg, #2ecc71 0%, #58d68d 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
     transform: scale(1);
   }
 }
