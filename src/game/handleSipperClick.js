@@ -22,13 +22,12 @@ const sipperFollowUp = [
     ],
   },
 ];
-function handleSipperClick(applicationState) {
+function handleSipperClick({ state: applicationState }) {
   console.log(`handleSipperClick `);
   if (applicationState === "inital") {
-    startStory(exampleStory);
-    applicationState = "progress";
   }
   if (applicationState === "progress") {
+    window.startStory(sipperFollowUp);
   }
   if (applicationState === "completed") {
   }

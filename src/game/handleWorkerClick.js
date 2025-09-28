@@ -22,13 +22,14 @@ const workerFollowUp = [
     ],
   },
 ];
-function handleWorkerClick(applicationState) {
+function handleWorkerClick({ state: applicationState }) {
   console.log("worker");
+  console.log(applicationState);
   if (applicationState === "inital") {
-    startStory(exampleStory);
-    applicationState = "progress";
   }
   if (applicationState === "progress") {
+    window.startStory(workerFollowUp);
+    applicationState = "completed";
   }
   if (applicationState === "completed") {
   }

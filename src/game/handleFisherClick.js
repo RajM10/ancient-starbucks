@@ -32,13 +32,13 @@ const fisherClue = [
     dialogues: ["Hidden in the shallow water... Good to know."],
   },
 ];
-function handleFisherClick(applicationState) {
+function handleFisherClick({ state: applicationState }) {
   console.log("fisher");
   if (applicationState === "inital") {
-    startStory(exampleStory);
     applicationState = "progress";
   }
   if (applicationState === "progress") {
+    window.startStory(fisherClue);
   }
   if (applicationState === "completed") {
   }

@@ -21,13 +21,12 @@ const knightFollowUp = [
     ],
   },
 ];
-function handleKnightClick(applicationState) {
+function handleKnightClick({ state: applicationState }) {
   console.log("knight");
   if (applicationState === "inital") {
-    startStory(exampleStory);
-    applicationState = "progress";
   }
   if (applicationState === "progress") {
+    window.startStory(knightFollowUp);
   }
   if (applicationState === "completed") {
   }

@@ -43,13 +43,12 @@ const coconutBonkFollowUp = [
   },
 ];
 
-function handleCocopheusClick(applicationState) {
+function handleCocopheusClick({ state: applicationState }) {
   console.log("cocopheus");
   if (applicationState === "inital") {
-    startStory(exampleStory);
-    applicationState = "progress";
   }
   if (applicationState === "progress") {
+    window.startStory(coconutBonkFollowUp);
   }
   if (applicationState === "completed") {
   }

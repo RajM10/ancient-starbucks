@@ -1,5 +1,3 @@
-import startStory from "../helper/startStory";
-
 const heidiExplorpheusQuest = [
   // --- Phase 1: The Introduction ---
   {
@@ -156,13 +154,14 @@ const questCompletion = [
 ];
 
 export default function handleChallenge(applicationState) {
-  if (applicationState === "inital") {
-    startStory(exampleStory);
-    applicationState = "progress";
+  const { state } = applicationState;
+  if (state === "inital") {
+    window.startStory(heidiExplorpheusQuest);
+    applicationState.state = "progress";
   }
-  if (applicationState === "progress") {
+  if (state === "progress") {
   }
-  if (applicationState === "completed") {
+  if (state === "completed") {
   }
-  console.log(applicationState);
+  console.log(state);
 }

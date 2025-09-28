@@ -21,13 +21,12 @@ const fleaFollowUp = [
     ],
   },
 ];
-function handleFleaClick(applicationState) {
+function handleFleaClick({ state: applicationState }) {
   console.log(`handleFleaClick `);
   if (applicationState === "inital") {
-    startStory(exampleStory);
-    applicationState = "progress";
   }
   if (applicationState === "progress") {
+    window.startStory(fleaFollowUp);
   }
   if (applicationState === "completed") {
   }

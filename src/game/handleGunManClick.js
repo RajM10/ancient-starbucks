@@ -1,3 +1,4 @@
+let ask = -1;
 const gunmanKnightRivalry = [
   {
     id: "player_approaches_rivals",
@@ -61,13 +62,20 @@ const gunmanFollowUp = [
   },
 ];
 
-function handleGunManClick(applicationState) {
+function handleGunManClick({ state: applicationState }) {
   console.log(`handleGunManClick `);
   if (applicationState === "inital") {
-    startStory(exampleStory);
-    applicationState = "progress";
   }
   if (applicationState === "progress") {
+    switch (ask) {
+      case -1:
+        window.startStory(gunmanKnightRivalry);
+        ask = 0;
+        break;
+      case 0:
+        window.startStory(gunmanFollowUp);
+        break;
+    }
   }
   if (applicationState === "completed") {
   }

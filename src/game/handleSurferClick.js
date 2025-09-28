@@ -22,13 +22,13 @@ const surferFollowUp = [
     ],
   },
 ];
-function handleSurferClick(applicationState) {
+function handleSurferClick({ state: applicationState }) {
   console.log("surfer");
   if (applicationState === "inital") {
-    startStory(exampleStory);
-    applicationState = "progress";
   }
   if (applicationState === "progress") {
+    window.startStory(surferFollowUp);
+
   }
   if (applicationState === "completed") {
   }

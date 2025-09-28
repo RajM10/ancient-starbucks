@@ -40,12 +40,13 @@ const thiefFollowUp = [
 ];
 export default function handleThiefClick(applicationState) {
   console.log("Thief found");
-  if (applicationState === "inital") {
-    startStory(exampleStory);
-    applicationState = "progress";
+  const { state } = applicationState;
+  if (state === "inital") {
   }
-  if (applicationState === "progress") {
+  if (state === "progress") {
+    window.startStory(thiefFollowUp);
+    applicationState.state = "completed";
   }
-  if (applicationState === "completed") {
+  if (state === "completed") {
   }
 }

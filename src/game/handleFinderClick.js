@@ -22,13 +22,10 @@ const finderFollowUp = [
     ],
   },
 ];
-function handleFinderClick(applicationState) {
+function handleFinderClick({ state: applicationState }) {
   console.log("finder");
-  if (applicationState === "inital") {
-    startStory(exampleStory);
-    applicationState = "progress";
-  }
   if (applicationState === "progress") {
+    window.startStory(finderFollowUp);
   }
   if (applicationState === "completed") {
   }

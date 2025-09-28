@@ -21,13 +21,13 @@ const baristaFollowUp = [
     ],
   },
 ];
-function handleStartBugs(applicationState) {
+function handleStartBugs({ state: applicationState }) {
   console.log("startBugs");
   if (applicationState === "inital") {
-    startStory(exampleStory);
-    applicationState = "progress";
   }
   if (applicationState === "progress") {
+    window.startStory(baristaFollowUp);
+
   }
   if (applicationState === "completed") {
   }

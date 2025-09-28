@@ -24,13 +24,13 @@ const musicFollowUp = [
   },
 ];
 
-function handleMusicClick(applicationState) {
+function handleMusicClick({ state: applicationState }) {
   console.log(`handleMusicClick `);
   if (applicationState === "inital") {
-    startStory(exampleStory);
-    applicationState = "progress";
   }
   if (applicationState === "progress") {
+    window.startStory(musicFollowUp);
+
   }
   if (applicationState === "completed") {
   }
