@@ -7,19 +7,19 @@ import Panic from "./assets/Panic";
 import StarBugs from "./assets/StarBugs";
 import Boat from "./assets/Boat";
 import "./style.css";
+import "./containers.css";
+import "./global.css";
 import StoryTeller from "./StoryTeller";
+import Thief from "./assets/Thief";
 
-const html =
-  StarBugs() +
-  Panic() +
-  Calm() +
-  Bush1() +
-  Bush2() +
-  Bush3() +
-  Bush4() +
-  Boat();
+const html = StarBugs() + Panic() + Calm() + Boat();
+function handleThiefClick() {
+  console.log("Thief found");
+}
+
+const bushHtml = `<div id="bush-container">${Array.from({ length: 6 }, (_, id) => Bush1(id)).join("")}${Bush2()}${Bush3()}${Bush4()}${Thief(handleThiefClick)}</div>`;
+
 const images = [
-  { id: "thief", path: "/som/map.png" },
   { id: "finder", path: "/som/find.png" },
   { id: "char", path: "/som/char.png" },
   { id: "gunMan", path: "/som/gun.png" },
@@ -32,6 +32,9 @@ const images = [
   { id: "shells", path: "/som/shells.png" },
   { id: "starfish", path: "/som/starFish.png" },
   { id: "stones", path: "/som/stones.png" },
+  { id: "music", path: "/som/music-guy.png" },
+  { id: "flea", path: "/som/flea.png" },
+  { id: "cocopheus", path: "/som/cocopheus.png" },
 ];
 // Dialogue system configuration
 const dialogueConfig = {
@@ -139,7 +142,7 @@ function startStory(storyData) {
   storyTeller.init(storyData);
 }
 
-startStory(exampleStory);
+// startStory(exampleStory);
 // Make storyTeller globally accessible
 window.storyTeller = storyTeller;
 window.startStory = startStory;
@@ -205,7 +208,8 @@ setTimeout(() => {
 
   // Show main content
   setTimeout(() => {
-    document.querySelector("#app").innerHTML = `${html} ${imgHTML}`;
+    document.querySelector("#app").innerHTML = `${html} ${imgHTML} ${bushHtml}`;
+    document.getElementById("thief").addEventListener('click',handleThiefClick)
     setupDialogueSystem();
   }, 500); // Wait for fade out animation
 }, 2000); // Show loading for 2 seconds

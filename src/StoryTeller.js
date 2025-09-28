@@ -4,6 +4,9 @@ export default class StoryTeller {
     this.currentMessageIndex = 0;
     this.isActive = false;
     this.dialogueData = null;
+    this.typewriterInterval = null;
+    this.isTyping = false;
+    this.typewriterSpeed = 50; // milliseconds per character
   }
 
   // Initialize story teller with dialogue data
@@ -13,6 +16,53 @@ export default class StoryTeller {
     this.currentMessageIndex = 0;
     this.isActive = true;
     this.render();
+  }
+  // Typewriter effect for dialogue text
+  startTypewriter(text) {
+    // Clear any existing typewriter
+    this.stopTypewriter();
+
+    const container = document.getElementById("dialogue-text-id");
+    if (!container) return;
+
+    container.innerText = "";
+    this.isTyping = true;
+
+    let i = 0;
+    this.typewriterInterval = setInterval(() => {
+      if (i < text.length) {
+        // Use textContent instead of innerText to preserve spaces
+        container.textContent += text[i];
+        i++;
+      } else {
+        this.stopTypewriter();
+        this.isTyping = false;
+        // Don't auto-advance, wait for user click
+      }
+    }, this.typewriterSpeed);
+  }
+
+  // Stop typewriter effect
+  stopTypewriter() {
+    if (this.typewriterInterval) {
+      clearInterval(this.typewriterInterval);
+      this.typewriterInterval = null;
+    }
+    this.isTyping = false;
+  }
+
+  // Skip typewriter and show full text
+  skipTypewriter() {
+    if (this.isTyping) {
+      this.stopTypewriter();
+      const currentDialogue = this.dialogueData[this.currentDialogueIndex];
+      const currentMessage =
+        currentDialogue.dialogues[this.currentMessageIndex];
+      const container = document.getElementById("dialogue-text-id");
+      if (container) {
+        container.textContent = currentMessage;
+      }
+    }
   }
 
   // Render the story teller interface
@@ -27,30 +77,30 @@ export default class StoryTeller {
         <div class='story-teller-container'>
         <div class='story-character-container'>
           <!-- Left side - Player/You -->
-          <div class='character-left'>
-            <div class='character-image ${currentDialogue.speaker === 'you' ? 'active' : ''}'>
-              <img src='${currentDialogue.speaker === 'you' ? currentDialogue.images.you : currentDialogue.images.other}' alt='${currentDialogue.speaker}' />
+          <div class='character-left ${currentDialogue.speaker === "you" ? "active" : ""}'>
+            <div class='character-image '>
+              <img src='${currentDialogue.images.you}' alt='${currentDialogue.speaker}' />
             </div>
           </div>
 
           <!-- Right side - Other character -->
-          <div class='character-right'>
-            <div class='character-image ${currentDialogue.speaker === 'you' ? '' : 'active'}'>
-              <img src='${currentDialogue.speaker === 'you' ? currentDialogue.images.other : currentDialogue.images.you}' alt='other' />
+          <div class='character-right ${currentDialogue.speaker === "you" ? "" : "active"}'>
+            <div class='character-image'>
+              <img src='${currentDialogue.images.other}' alt='other' />
             </div>
           </div>
         </div>
           <!-- Dialogue box -->
           <div class='dialogue-box'>
             <div class='dialogue-content'>
-              <div class='speaker-name'>${currentDialogue.speaker === 'you' ? 'You' : currentDialogue.speaker}</div>
-              <div class='dialogue-text'>${currentMessage}</div>
+              <div class='speaker-name'>${currentDialogue.speaker === "you" ? "You" : currentDialogue.speaker}</div>
+              <button class='skip-btn' onclick='storyTeller.skipAll()'>Skip>></button>
             </div>
             
             <!-- Navigation controls -->
-            <div class='dialogue-controls'>
-              <button class='skip-btn' onclick='storyTeller.skipAll()'>Skip All</button>
-              <button class='next-btn' onclick='storyTeller.nextMessage()'>Next</button>
+            <div class='dialogue-controls' onclick='storyTeller.handleDialogueClick()'>
+              <div id="dialogue-text-id" class='dialogue-text' ></div>
+              <button class='next-btn' onclick='storyTeller.nextMessage()' style='display: none;' id='next-btn'>Next</button>
             </div>
           </div>
         </div>
@@ -58,16 +108,33 @@ export default class StoryTeller {
     `;
 
     // Remove existing story teller if any
-    const existing = document.getElementById('story-teller');
+    const existing = document.getElementById("story-teller");
     if (existing) existing.remove();
 
     // Add to body
-    document.body.insertAdjacentHTML('beforeend', storyTellerHTML);
+    document.body.insertAdjacentHTML("beforeend", storyTellerHTML);
+
+    // Start typewriter effect
+    this.startTypewriter(currentMessage);
+  }
+
+  // Handle dialogue text click
+  handleDialogueClick() {
+    if (this.isTyping) {
+      // If currently typing, skip to show full text
+      this.skipTypewriter();
+    } else {
+      // If not typing, advance to next message
+      this.nextMessage();
+    }
   }
 
   // Go to next message
   nextMessage() {
     if (!this.dialogueData) return;
+
+    // Stop any ongoing typewriter
+    this.stopTypewriter();
 
     const currentDialogue = this.dialogueData[this.currentDialogueIndex];
 
@@ -97,7 +164,8 @@ export default class StoryTeller {
   // End story teller
   end() {
     this.isActive = false;
-    const storyTeller = document.getElementById('story-teller');
+    this.stopTypewriter();
+    const storyTeller = document.getElementById("story-teller");
     if (storyTeller) {
       storyTeller.remove();
     }
