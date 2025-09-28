@@ -210,3 +210,7 @@
   z-index: 7;
   bottom: -5px;
 }
+#info-container {
+  position: fixed;
+  top: 5rem;
+}
