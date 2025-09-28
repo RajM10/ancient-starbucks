@@ -11,11 +11,21 @@ import "./containers.css";
 import "./global.css";
 import StoryTeller from "./StoryTeller";
 import Thief from "./assets/Thief";
+import handleThiefClick from "./game/handleThief";
+import handleChallenge from "./game/handleChallenge";
+import passGlobalState from "./helper/passGlobalState";
+import handleCocopheusClick from "./game/handleCocopheusClick";
+import handleFisherClick from "./game/handleFisherClick";
+import handleKnightClick from "./game/handleKnightClick";
+import handleStartBugs from "./game/handleStartBugs";
+import handleFinderClick from "./game/handleFinderClick";
+import handleWorkerClick from "./game/handleWorkerClick";
+import handleGunManClick from "./game/handleGunManClick";
+import handleMusicClick from "./game/handleMusicClick";
+import handleSipperClick from "./game/handleSipperClick";
+import handleFleaClick from "./game/handleFleaClick";
 
 const html = StarBugs() + Panic() + Calm() + Boat();
-function handleThiefClick() {
-  console.log("Thief found");
-}
 
 const bushHtml = `<div id="bush-container">${Array.from({ length: 6 }, (_, id) => Bush1(id)).join("")}${Bush2()}${Bush3()}${Bush4()}${Thief(handleThiefClick)}</div>`;
 
@@ -36,8 +46,8 @@ const images = [
   { id: "cocopheus", path: "/som/cocopheus.png" },
 ];
 // Dialogue system configuration
+let applicationState = "inital";
 const dialogueConfig = {
-  
   thief: {
     text: "I have the map! Want to see the treasure location?",
     position: { top: "-7.375rem", right: "-1rem" },
@@ -82,62 +92,6 @@ function createDialogueBubble(id, config) {
     </div>
   `;
 }
-
-// Create global story teller instance
-const storyTeller = new StoryTeller();
-
-// Example story data structure
-const exampleStory = [
-  {
-    id: "intro",
-    speaker: "you",
-    images: {
-      you: "/som/char.png",
-      other: "/som/worker.png",
-    },
-    dialogues: [
-      "Hello there! I'm new to this place.",
-      "Can you help me understand what's happening here?",
-      "I see there are many interesting characters around.",
-    ],
-  },
-  {
-    id: "worker_response",
-    speaker: "worker",
-    images: {
-      you: "/som/char.png",
-      other: "/som/worker.png",
-    },
-    dialogues: [
-      "Welcome to Ancient Starbucks! I'm the worker here.",
-      "This is a magical place where stories come to life.",
-      "Each character you see has their own story to tell.",
-      "Would you like to explore and meet everyone?",
-    ],
-  },
-  {
-    id: "your_decision",
-    speaker: "you",
-    images: {
-      you: "/som/char.png",
-      other: "/som/worker.png",
-    },
-    dialogues: [
-      "That sounds amazing! I'd love to explore.",
-      "Where should I start my adventure?",
-    ],
-  },
-];
-
-// Helper function to start a story
-function startStory(storyData) {
-  storyTeller.init(storyData);
-}
-
-// startStory(exampleStory);
-// Make storyTeller globally accessible
-window.storyTeller = storyTeller;
-window.startStory = startStory;
 
 // Add click event listeners for dialogue system
 function setupDialogueSystem() {
@@ -197,13 +151,81 @@ setTimeout(() => {
   if (loadingScreen) {
     loadingScreen.classList.add("hidden");
   }
-
   // Show main content
   setTimeout(() => {
     document.querySelector("#app").innerHTML = `${html} ${imgHTML} ${bushHtml}`;
-    document
-      .getElementById("thief")
-      .addEventListener("click", handleThiefClick);
     setupDialogueSystem();
+    addListeners();
   }, 500); // Wait for fade out animation
 }, 2000); // Show loading for 2 seconds
+
+function addListeners() {
+  const theif = document.getElementById("thief");
+  const mainChar = document.getElementById("main-character-calm");
+  const finder = document.getElementById("finder");
+  const worker = document.getElementById("worker");
+  const surfer = document.getElementById("surfer");
+  const knight = document.getElementById("knight");
+  const fisher = document.getElementById("fisher");
+  const cocopheus = document.getElementById("cocopheus");
+  const starbugs = document.getElementById("starbugs");
+  const gunMan = document.getElementById("gunMan");
+  const sipper = document.getElementById("sipper");
+  const music = document.getElementById("music");
+  const flea = document.getElementById("flea");
+
+  finder.addEventListener(
+    "click",
+    passGlobalState(handleFinderClick, applicationState)
+  );
+  worker.addEventListener(
+    "click",
+    passGlobalState(handleWorkerClick, applicationState)
+  );
+  surfer.addEventListener(
+    "click",
+    passGlobalState(handleChallenge, applicationState)
+  );
+  knight.addEventListener(
+    "click",
+    passGlobalState(handleKnightClick, applicationState)
+  );
+  fisher.addEventListener(
+    "click",
+    passGlobalState(handleFisherClick, applicationState)
+  );
+  cocopheus.addEventListener(
+    "click",
+    passGlobalState(handleCocopheusClick, applicationState)
+  );
+  starbugs.addEventListener(
+    "click",
+    passGlobalState(handleStartBugs, applicationState)
+  );
+
+  theif.addEventListener(
+    "click",
+    passGlobalState(handleThiefClick, applicationState)
+  );
+
+  mainChar.addEventListener(
+    "click",
+    passGlobalState(handleChallenge, applicationState)
+  );
+   gunMan.addEventListener(
+    "click",
+    passGlobalState(handleGunManClick, applicationState)
+  );
+   sipper.addEventListener(
+    "click",
+    passGlobalState(handleSipperClick, applicationState)
+  );
+  music.addEventListener(
+    "click",
+    passGlobalState(handleMusicClick, applicationState)
+  );
+  flea.addEventListener(
+    "click",
+    passGlobalState(handleFleaClick, applicationState)
+  );
+}
