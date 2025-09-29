@@ -99,8 +99,8 @@ const loadingScreenHTML = `
   </div>
 `;
 
-// Show loading screen first
-document.querySelector("#app").innerHTML = loadingScreenHTML;
+// Show loading overlay and pre-render main content underneath to avoid jitter
+document.querySelector("#app").innerHTML = `${loadingScreenHTML} ${html} ${imgHTML} ${bushHtml}`;
 
 // Preload assets, then show main content
 function preloadImages(paths) {
@@ -130,11 +130,11 @@ preloadImages(assetsToLoad).then(() => {
   if (loadingScreen) {
     loadingScreen.classList.add("hidden");
   }
+  // Attach behavior after overlay starts fading; HTML is already rendered
   setTimeout(() => {
-    document.querySelector("#app").innerHTML = `${html} ${imgHTML} ${bushHtml}`;
     handleMusic();
     addListeners();
-  }, 500);
+  }, 300);
 });
 
 function addListeners() {
