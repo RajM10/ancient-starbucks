@@ -1,4 +1,5 @@
 import { showDialogue } from "../helper/dialogueChanger";
+import { music } from "../helper/handleMusic";
 
 const musicFollowUp = [
   {
@@ -28,6 +29,15 @@ const musicFollowUp = [
 
 function handleMusicClick({ state: applicationState }) {
   console.log(`handleMusicClick `);
+  const musicContainer = document.getElementById("music-container");
+  const isUp = musicContainer.classList.toggle("active");
+
+  if (isUp) {
+    music.volume = 0.8;
+  } else {
+    music.volume = 0.1;
+  }
+
   if (applicationState === "initial") {
     showDialogue("music", "initial");
   }
@@ -35,6 +45,9 @@ function handleMusicClick({ state: applicationState }) {
     window.startStory(musicFollowUp);
   }
   if (applicationState === "completed") {
+    music.src = "/music/success.mp3";
+    music.play();
+    music.volume = 0.4;
     showDialogue("music", "completed");
   }
 }

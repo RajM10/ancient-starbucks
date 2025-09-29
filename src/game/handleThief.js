@@ -1,4 +1,6 @@
+import showToast from "../helper/showToast";
 import { showDialogue } from "../helper/dialogueChanger";
+import { music } from "../helper/handleMusic";
 const thiefFollowUp = [
   {
     id: "player_confronts_thief",
@@ -33,7 +35,7 @@ const thiefFollowUp = [
       thief: "/character/thief.png",
     },
     dialogues: [
-      "Thief: Turns out it's not a treasure map at all. Just some boring coastline.",
+      "Turns out it's not a treasure map at all. Just some boring coastline.",
       "Seeing as you're the first person clever enough to notice, you can have it.",
       "It's probably more useful to you anyway.",
     ],
@@ -41,6 +43,8 @@ const thiefFollowUp = [
 ];
 export default function handleThiefClick(applicationState) {
   console.log("Thief found");
+  const calm = document.getElementById("heidiAndExplorpheusCalm");
+  const panic = document.getElementById("heidiAndExplorpheusPanic");
   const { state } = applicationState;
   if (state === "initial") {
     showDialogue("thief", "initial");
@@ -51,5 +55,9 @@ export default function handleThiefClick(applicationState) {
   }
   if (state === "completed") {
     showDialogue("thief", "completed");
+    calm.style.opacity = 1;
+    calm.style.display = "block";
+    panic.style.opacity = 0;
+    panic.style.display = "none";
   }
 }

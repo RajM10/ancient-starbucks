@@ -79,14 +79,14 @@ export default class StoryTeller {
           <!-- Left side - Player/You -->
           <div class='character-left ${currentDialogue.speaker === "you" ? "active" : ""}'>
             <div class='character-image '>
-              <img src='${currentDialogue.images.you}' alt='${currentDialogue.speaker}' />
+              <img src='${currentDialogue.images[currentDialogue.speaker]}' alt='${currentDialogue.speaker}' />
             </div>
           </div>
 
           <!-- Right side - Other character -->
           <div class='character-right ${currentDialogue.speaker === "you" ? "" : "active"}'>
             <div class='character-image'>
-              <img src='${currentDialogue.images.other}' alt='other' />
+              <img src='${currentDialogue.images[currentDialogue.speaker]}' alt='other' />
             </div>
           </div>
         </div>

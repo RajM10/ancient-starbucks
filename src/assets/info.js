@@ -33,6 +33,6 @@ export const info = {
     progress:
       "The boat is ready, but Heidi and Explorpheus don't have a complete chart. Setting sail without a destination seems pointless.",
     success:
-      "The way is clear! The boat is ready to take you on your next adventure. Where to?",
+      "The boat is yours to command. Where to? We can head to <a href='/scenes/the-swole-hole/'>The Swole Hole</a> or take the boat to <a href='/scenes/the-bridge-on-the-river-shy/'>The Bridge on the River Shy</a>.",
   },
 };

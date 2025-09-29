@@ -91,6 +91,7 @@ function createBubbleElement(characterId, position) {
   bubble.style.top = position.top;
   bubble.style.right = position.right;
   bubble.style.transform = "translateX(59%)";
+  bubble.style.zIndex = 20;
   return bubble;
 }
 

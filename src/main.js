@@ -29,6 +29,7 @@ import handleBoatClick from "./game/handleBoatClick";
 import handleStonesClick from "./game/handleStonesClick";
 import handleNewspaperClick from "./game/handleNewspaperClick";
 import handleSurferClick from "./game/handleSurferClick";
+import handleMusic from "./helper/handleMusic";
 
 const html = Panic() + Calm() + Boat();
 const storyTeller = new StoryTeller();
@@ -83,11 +84,6 @@ const imgHTML = images
 // Create loading screen HTML
 const loadingScreenHTML = `
   <div class="loading-screen" id="loading-screen">
-    <div class="loading-logo">
-      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-        <path fill="#FF0066" d="M23.1,-33C32.8,-34.3,45.5,-34,56.1,-28.2C66.7,-22.4,75.2,-11.2,78,1.6C80.8,14.4,77.8,28.8,70.9,41C63.9,53.1,53,62.9,40.5,72C28,81.1,14,89.5,1.4,87.1C-11.3,84.8,-22.5,71.7,-35.3,62.7C-48.1,53.8,-62.4,49,-67,39.3C-71.7,29.5,-66.7,14.8,-68.3,-1C-70,-16.7,-78.3,-33.3,-73.2,-42.4C-68.2,-51.5,-49.8,-53,-35.4,-48.9C-21,-44.8,-10.5,-35.1,-1.9,-31.8C6.7,-28.5,13.3,-31.6,23.1,-33Z" transform="translate(100 100)" />
-      </svg>
-    </div>
     <div class="loading-text">Ancient Starbucks</div>
     <div class="loading-subtitle">Loading your adventure...</div>
     <div class="loading-spinner"></div>
@@ -112,13 +108,15 @@ setTimeout(() => {
   // Show main content
   setTimeout(() => {
     document.querySelector("#app").innerHTML = `${html} ${imgHTML} ${bushHtml}`;
+    handleMusic();
     addListeners();
   }, 500); // Wait for fade out animation
 }, 2000); // Show loading for 2 seconds
 
 function addListeners() {
   const theif = document.getElementById("thief");
-  const mainChar = document.getElementById("main-character-calm");
+  const mainChar = document.getElementById("heidiAndExplorpheusCalm");
+  const mainCharPanic = document.getElementById("heidiAndExplorpheusPanic");
   const finder = document.getElementById("finder");
   const worker = document.getElementById("worker");
   const surfer = document.getElementById("surfer");
@@ -135,78 +133,82 @@ function addListeners() {
   const starfish = document.getElementById("starfish");
   const stones = document.getElementById("stones");
   const newspaper = document.getElementById("newspaper");
+  mainCharPanic.addEventListener(
+    "click",
+    passGlobalState(handleChallenge, applicationState)
+  );
   finder.addEventListener(
     "click",
-    passGlobalState(handleFinderClick, applicationState),
+    passGlobalState(handleFinderClick, applicationState)
   );
   worker.addEventListener(
     "click",
-    passGlobalState(handleWorkerClick, applicationState),
+    passGlobalState(handleWorkerClick, applicationState)
   );
   surfer.addEventListener(
     "click",
-    passGlobalState(handleSurferClick, applicationState),
+    passGlobalState(handleSurferClick, applicationState)
   );
   knight.addEventListener(
     "click",
-    passGlobalState(handleKnightClick, applicationState),
+    passGlobalState(handleKnightClick, applicationState)
   );
   fisher.addEventListener(
     "click",
-    passGlobalState(handleFisherClick, applicationState),
+    passGlobalState(handleFisherClick, applicationState)
   );
   cocopheus.addEventListener(
     "click",
-    passGlobalState(handleCocopheusClick, applicationState),
+    passGlobalState(handleCocopheusClick, applicationState)
   );
   starbugs.addEventListener(
     "click",
-    passGlobalState(handleStarBugs, applicationState),
+    passGlobalState(handleStarBugs, applicationState)
   );
 
   theif.addEventListener(
     "click",
-    passGlobalState(handleThiefClick, applicationState),
+    passGlobalState(handleThiefClick, applicationState)
   );
 
   mainChar.addEventListener(
     "click",
-    passGlobalState(handleChallenge, applicationState),
+    passGlobalState(handleChallenge, applicationState)
   );
   gunMan.addEventListener(
     "click",
-    passGlobalState(handleGunManClick, applicationState),
+    passGlobalState(handleGunManClick, applicationState)
   );
   sipper.addEventListener(
     "click",
-    passGlobalState(handleSipperClick, applicationState),
+    passGlobalState(handleSipperClick, applicationState)
   );
   music.addEventListener(
     "click",
-    passGlobalState(handleMusicClick, applicationState),
+    passGlobalState(handleMusicClick, applicationState)
   );
   flea.addEventListener(
     "click",
-    passGlobalState(handleFleaClick, applicationState),
+    passGlobalState(handleFleaClick, applicationState)
   );
   starfish.addEventListener(
     "click",
-    passGlobalState(handleStarfishClick, applicationState),
+    passGlobalState(handleStarfishClick, applicationState)
   );
   shells.addEventListener(
     "click",
-    passGlobalState(handleShellsClick, applicationState),
+    passGlobalState(handleShellsClick, applicationState)
   );
   boat.addEventListener(
     "click",
-    passGlobalState(handleBoatClick, applicationState),
+    passGlobalState(handleBoatClick, applicationState)
   );
   stones.addEventListener(
     "click",
-    passGlobalState(handleStonesClick, applicationState),
+    passGlobalState(handleStonesClick, applicationState)
   );
   newspaper.addEventListener(
     "click",
-    passGlobalState(handleNewspaperClick, applicationState),
+    passGlobalState(handleNewspaperClick, applicationState)
   );
 }

@@ -19,7 +19,7 @@ const toastStyles = `
   z-index: 9999;
   opacity: 0;
   transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  pointer-events: none;
+  pointer-events: auto;
   border: 3px solid rgba(255,255,255,0.4);
   letter-spacing: 0.5px;
 }
@@ -60,7 +60,7 @@ export default function showToast(message, duration = 5000) {
   // Create new toast element
   const toast = document.createElement("div");
   toast.className = "toast-notification";
-  toast.textContent = message;
+  toast.innerHTML = message;
   currentToast = toast;
 
   // Add to body

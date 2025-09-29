@@ -1,3 +1,5 @@
+import { showDialogue } from "../helper/dialogueChanger";
+
 const heidiExplorpheusQuest = [
   // --- Phase 1: The Introduction ---
   {
@@ -154,14 +156,23 @@ const questCompletion = [
 ];
 
 export default function handleChallenge(applicationState) {
+  const calm = document.getElementById("heidiAndExplorpheusCalm");
+  const panic = document.getElementById("heidiAndExplorpheusPanic");
   const { state } = applicationState;
   if (state === "initial") {
     window.startStory(heidiExplorpheusQuest);
     applicationState.state = "progress";
+    calm.style.opacity = 0;
+    calm.style.display = "none";
+    panic.style.opacity = 1;
+    panic.style.display = "block";
   }
   if (state === "progress") {
+    console.log('heidi')
+    showDialogue("heidiAndExplorpheusPanic", "progress");
   }
   if (state === "completed") {
+    showDialogue("heidiAndExplorpheusCalm", "completed");
   }
   console.log(state);
 }

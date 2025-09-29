@@ -69,9 +69,10 @@
   left: 1dvw;
   bottom: 2dvh;
   height: 130px;
+  transition: transform 0.4s ease-in-out;
 }
 #music-container.active {
-  bottom: 6dvh;
+  transform: translateY(-1%);
 }
 #flea-container {
   right: 50dvw;
@@ -109,7 +110,7 @@
   bottom: 25dvh;
 }
 
-.main-character {
+#heidiAndExplorpheusCalm-container {
   width: 150px;
   height: 142px;
   position: absolute;
@@ -117,10 +118,18 @@
   bottom: 0.5dvw;
   z-index: 11;
 }
-#main-character-calm {
+#heidiAndExplorpheusPanic-container {
+  width: 150px;
+  height: 142px;
+  position: absolute;
+  right: 7dvw;
+  bottom: 0.5dvw;
+  z-index: 11;
+}
+#heidiAndExplorpheusCalm {
   opacity: 1;
 }
-#main-character-panic {
+#heidiAndExplorpheusPanic {
   opacity: 0;
   display: none;
 }

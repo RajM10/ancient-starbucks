@@ -1,6 +1,30 @@
 export const dialogueSystem = {
   // --- MAIN QUEST GIVERS ---
-  heidiAndExplorpheus: {
+  heidiAndExplorpheusCalm: {
+    text: {
+      initial: [
+        "Heidi: (Muttering to the map) The shoals should be here, but the coastline doesn't match...",
+        "Explorpheus: Patience, my dear. We're surveyors, not magicians. Let's get another coffee.",
+        "Heidi: This isn't a coffee break, Explorpheus, it's a navigational crisis!",
+        "Explorpheus: Every crisis is better with caffeine. That's the first rule of adventuring.",
+      ],
+      inProgress: [
+        "Heidi: Blast it all! Without a key landmark, sailing into those currents is a suicide mission.",
+        "Explorpheus: She's right. We're completely stuck here until we solve this chart.",
+        "Heidi: If you see anything, anything at all that looks like a missing map piece, let us know.",
+        "Explorpheus: Yes, we'd be eternally grateful! Now, about that coffee...",
+      ],
+      completed: [
+        "Heidi: (Beaming, holding the complete map) The way is clear! I can't thank you enough.",
+        "Explorpheus: A true hero! Your next coffee is on us, whenever we figure out who the barista is.",
+        "Heidi: The boat is yours to command. Just say the word!",
+        "Explorpheus: To adventure!",
+      ],
+    },
+    position: { top: "-8.5rem", right: "-2rem" },
+    bubbleColor: "#FFD700",
+  },
+  heidiAndExplorpheusPanic: {
     text: {
       initial: [
         "Heidi: (Muttering to the map) The shoals should be here, but the coastline doesn't match...",
