@@ -1,6 +1,7 @@
 import "./style.css";
 import "./containers.css";
 import "./global.css";
+import "./responsive.css";
 import Bush1 from "./assets/Bush1";
 import Bush2 from "./assets/Bush2";
 import Bush3 from "./assets/Bush3";
@@ -92,26 +93,49 @@ const loadingScreenHTML = `
       <div class="loading-dot"></div>
       <div class="loading-dot"></div>
     </div>
+    <div class="loading-waves">
+      <span></span><span></span><span></span>
+    </div>
   </div>
 `;
 
 // Show loading screen first
 document.querySelector("#app").innerHTML = loadingScreenHTML;
 
-// Simulate loading time and then show main content
-setTimeout(() => {
-  // Hide loading screen
+// Preload assets, then show main content
+function preloadImages(paths) {
+  return Promise.all(
+    paths.map(
+      (src) =>
+        new Promise((resolve) => {
+          const img = new Image();
+          img.onload = () => resolve(src);
+          img.onerror = () => resolve(src); // resolve even on error to avoid blocking
+          img.src = src;
+        })
+    )
+  );
+}
+
+const assetsToLoad = Array.from(
+  new Set([
+    ...images.map((i) => i.path),
+    "/StarBuck.png",
+    "/image/ChatBubble.svg",
+  ])
+);
+
+preloadImages(assetsToLoad).then(() => {
   const loadingScreen = document.getElementById("loading-screen");
   if (loadingScreen) {
     loadingScreen.classList.add("hidden");
   }
-  // Show main content
   setTimeout(() => {
     document.querySelector("#app").innerHTML = `${html} ${imgHTML} ${bushHtml}`;
     handleMusic();
     addListeners();
-  }, 500); // Wait for fade out animation
-}, 2000); // Show loading for 2 seconds
+  }, 500);
+});
 
 function addListeners() {
   const theif = document.getElementById("thief");

@@ -300,7 +300,7 @@ export const dialogueSystem = {
         "*bzzzt* A very good day indeed.",
       ],
     },
-    position: { top: "-5rem", right: "0" },
+    position: { top: "-8rem", right: "0" },
     bubbleColor: "#7f7f7f",
   },
   music: {

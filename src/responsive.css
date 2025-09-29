@@ -1,0 +1,99 @@
+/* Responsive overrides - minimal, additive-only */
+
+/* Base helpers */
+.hidden-on-mobile { display: none; }
+
+/* Small phones */
+@media (max-width: 480px) {
+  body {
+    background-position: center;
+    background-size: cover;
+  }
+
+  /* Loading screen text scaling */
+  .loading-text { font-size: 18px; }
+  .loading-subtitle { font-size: 14px; }
+
+  /* Waves height a bit smaller on very small screens */
+  .loading-waves { height: 90px; }
+
+  /* Character containers in StoryTeller */
+  .character-image { height: 140px; }
+  .dialogue-box { padding: 0.75rem 1rem 2rem; }
+  .speaker-name { font-size: 18px; }
+  .dialogue-text { font-size: 16px; }
+
+  /* Clickable image containers scale down */
+  .image-container { transform: translateY(40%); }
+  #starbugs-container { height: 14rem; }
+
+  /* Fine tune some positioned elements */
+  #music-container { height: 90px; }
+  #fisher-container { height: 100px; }
+  #heidiAndExplorpheusCalm-container,
+  #heidiAndExplorpheusPanic-container {
+    width: 120px;
+    height: 120px;
+    right: 4dvw;
+  }
+}
+
+/* Phones to small tablets */
+@media (min-width: 481px) and (max-width: 768px) {
+  .character-image { height: 160px; }
+  .dialogue-box { padding: 0.85rem 1.25rem 2.25rem; }
+  .speaker-name { font-size: 20px; }
+  .dialogue-text { font-size: 17px; }
+  #starbugs-container { height: 16rem; }
+}
+
+/* Tablets to small laptops */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .character-image { height: 180px; }
+  .dialogue-box { padding: 1rem 1.5rem 2.5rem; }
+  .speaker-name { font-size: 22px; }
+  .dialogue-text { font-size: 18px; }
+  #starbugs-container { height: 18rem; }
+}
+
+/* Landscape phones - avoid overflow */
+@media (max-height: 480px) {
+  body { height: 100vh; overflow: hidden; }
+  .story-teller-overlay { align-items: center; }
+  .character-image { height: 120px; }
+  .dialogue-box { padding: 0.5rem 1rem 1.25rem; }
+}
+
+/* Hide heavy characters and shrink starbugs on <= 1094px screens */
+@media (max-width: 1094px) {
+  /* Hide to reduce clutter and avoid blocking clicks */
+  #knight-container,
+  #gunMan-container { display: none; }
+
+  /* Make starbugs smaller to keep bush/thief area clear */
+  #starbugs-container {
+    height: 12rem;
+    bottom: 32dvh;
+    right: 0dvw;
+  }
+}
+
+/* If screen is too small, show a subtle guidance message */
+@media (max-width: 360px), (max-height: 420px) {
+  body::after {
+    content: "For best experience, use a larger screen";
+    position: fixed;
+    left: 50%;
+    bottom: 8px;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 12px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    z-index: 1000;
+    pointer-events: none;
+  }
+}
+
+
