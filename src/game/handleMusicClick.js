@@ -1,3 +1,5 @@
+import { showDialogue } from "../helper/dialogueChanger";
+
 const musicFollowUp = [
   {
     id: "player_asks_music",
@@ -26,13 +28,14 @@ const musicFollowUp = [
 
 function handleMusicClick({ state: applicationState }) {
   console.log(`handleMusicClick `);
-  if (applicationState === "inital") {
+  if (applicationState === "initial") {
+    showDialogue("music", "initial");
   }
   if (applicationState === "progress") {
     window.startStory(musicFollowUp);
-
   }
   if (applicationState === "completed") {
+    showDialogue("music", "completed");
   }
 }
 

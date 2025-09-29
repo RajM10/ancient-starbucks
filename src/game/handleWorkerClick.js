@@ -1,3 +1,4 @@
+import { showDialogue } from "../helper/dialogueChanger";
 const workerFollowUp = [
   {
     id: "player_asks_worker",
@@ -25,13 +26,15 @@ const workerFollowUp = [
 function handleWorkerClick({ state: applicationState }) {
   console.log("worker");
   console.log(applicationState);
-  if (applicationState === "inital") {
+  if (applicationState === "initial") {
+    showDialogue("worker", "initial");
   }
   if (applicationState === "progress") {
     window.startStory(workerFollowUp);
     applicationState = "completed";
   }
   if (applicationState === "completed") {
+    showDialogue("worker", "completed");
   }
 }
 

@@ -95,12 +95,12 @@
   height: 100px;
 }
 
-#starbugs {
-  width: 28.0625rem;
+#starbugs-container {
+  height: 20rem;
   aspect-ratio: 449/319;
   position: absolute;
   right: 0dvw;
-  bottom: 10dvh;
+  bottom: 28dvh;
   z-index: 10;
 }
 #boat {
@@ -201,13 +201,14 @@
   bottom: -0.4375rem;
   stroke-width: 0;
 }
-#thief {
+#thief-container {
   height: 4.6625rem;
   flex-shrink: 0;
   aspect-ratio: 68/73;
   position: absolute;
   left: -0.2rem;
   z-index: 7;
+  transform: translateY(-5%);
   bottom: -5px;
 }
 #info-container {

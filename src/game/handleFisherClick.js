@@ -1,3 +1,5 @@
+import { showDialogue } from "../helper/dialogueChanger";
+
 const fisherClue = [
   {
     id: "player_asks_fisher",
@@ -34,13 +36,14 @@ const fisherClue = [
 ];
 function handleFisherClick({ state: applicationState }) {
   console.log("fisher");
-  if (applicationState === "inital") {
-    applicationState = "progress";
+  if (applicationState === "initial") {
+    showDialogue("fisher", "initial");
   }
   if (applicationState === "progress") {
     window.startStory(fisherClue);
   }
   if (applicationState === "completed") {
+    showDialogue("fisher", "completed");
   }
 }
 

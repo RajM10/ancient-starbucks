@@ -1,3 +1,5 @@
+import { showDialogue } from "../helper/dialogueChanger";
+
 let ask = -1;
 const gunmanKnightRivalry = [
   {
@@ -64,7 +66,8 @@ const gunmanFollowUp = [
 
 function handleGunManClick({ state: applicationState }) {
   console.log(`handleGunManClick `);
-  if (applicationState === "inital") {
+  if (applicationState === "initial") {
+    showDialogue("gunMan", "initial");
   }
   if (applicationState === "progress") {
     switch (ask) {
@@ -78,6 +81,7 @@ function handleGunManClick({ state: applicationState }) {
     }
   }
   if (applicationState === "completed") {
+    showDialogue("gunMan", "completed");
   }
 }
 

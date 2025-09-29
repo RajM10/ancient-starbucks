@@ -9,16 +9,6 @@
   transform: scale(1.05);
 }
 
-#starbuck {
-  position: absolute;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-#starbuck:hover {
-  transform: scale(1.05);
-}
-
 #find {
   position: absolute;
   cursor: pointer;
@@ -59,7 +49,7 @@
   display: flex;
   align-items: center;
   aspect-ratio: 377/272;
-  height: 7.8125rem;
+  height: 8.8125rem;
   background-size: cover;
   font-weight: bold;
   text-align: center;

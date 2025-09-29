@@ -1,3 +1,5 @@
+import { showDialogue } from "../helper/dialogueChanger";
+
 const coconutBonkFollowUp = [
   {
     id: "player_checks_on_bonk",
@@ -44,13 +46,14 @@ const coconutBonkFollowUp = [
 ];
 
 function handleCocopheusClick({ state: applicationState }) {
-  console.log("cocopheus");
-  if (applicationState === "inital") {
+  if (applicationState === "initial") {
+    showDialogue("cocopheus", "initial");
   }
   if (applicationState === "progress") {
     window.startStory(coconutBonkFollowUp);
   }
   if (applicationState === "completed") {
+    showDialogue("cocopheus", "completed");
   }
 }
 

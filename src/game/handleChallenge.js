@@ -155,7 +155,7 @@ const questCompletion = [
 
 export default function handleChallenge(applicationState) {
   const { state } = applicationState;
-  if (state === "inital") {
+  if (state === "initial") {
     window.startStory(heidiExplorpheusQuest);
     applicationState.state = "progress";
   }

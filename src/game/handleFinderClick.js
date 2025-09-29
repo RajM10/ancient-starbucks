@@ -1,3 +1,5 @@
+import { showDialogue } from "../helper/dialogueChanger";
+
 const finderFollowUp = [
   {
     id: "player_asks_finder",
@@ -23,11 +25,12 @@ const finderFollowUp = [
   },
 ];
 function handleFinderClick({ state: applicationState }) {
-  console.log("finder");
-  if (applicationState === "progress") {
+  if (applicationState === "initial") {
+    showDialogue("finder", "initial");
+  } else if (applicationState === "progress") {
     window.startStory(finderFollowUp);
-  }
-  if (applicationState === "completed") {
+  } else if (applicationState === "completed") {
+    showDialogue("finder", "completed");
   }
 }
 

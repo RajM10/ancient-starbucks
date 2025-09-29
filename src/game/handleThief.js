@@ -1,3 +1,4 @@
+import { showDialogue } from "../helper/dialogueChanger";
 const thiefFollowUp = [
   {
     id: "player_confronts_thief",
@@ -41,12 +42,14 @@ const thiefFollowUp = [
 export default function handleThiefClick(applicationState) {
   console.log("Thief found");
   const { state } = applicationState;
-  if (state === "inital") {
+  if (state === "initial") {
+    showDialogue("thief", "initial");
   }
   if (state === "progress") {
     window.startStory(thiefFollowUp);
     applicationState.state = "completed";
   }
   if (state === "completed") {
+    showDialogue("thief", "completed");
   }
 }

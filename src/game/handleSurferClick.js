@@ -1,3 +1,4 @@
+import { showDialogue } from "../helper/dialogueChanger";
 const surferFollowUp = [
   {
     id: "player_asks_surfer",
@@ -24,13 +25,14 @@ const surferFollowUp = [
 ];
 function handleSurferClick({ state: applicationState }) {
   console.log("surfer");
-  if (applicationState === "inital") {
+  if (applicationState === "initial") {
+    showDialogue("surfer", "initial");
   }
   if (applicationState === "progress") {
     window.startStory(surferFollowUp);
-
   }
   if (applicationState === "completed") {
+    showDialogue("surfer", "completed");
   }
 }
 

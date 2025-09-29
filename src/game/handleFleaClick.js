@@ -1,3 +1,5 @@
+import { showDialogue } from "../helper/dialogueChanger";
+
 const fleaFollowUp = [
   {
     id: "player_asks_flea",
@@ -23,12 +25,14 @@ const fleaFollowUp = [
 ];
 function handleFleaClick({ state: applicationState }) {
   console.log(`handleFleaClick `);
-  if (applicationState === "inital") {
+  if (applicationState === "initial") {
+    showDialogue("flea", "initial");
   }
   if (applicationState === "progress") {
     window.startStory(fleaFollowUp);
   }
   if (applicationState === "completed") {
+    showDialogue("flea", "completed");
   }
 }
 

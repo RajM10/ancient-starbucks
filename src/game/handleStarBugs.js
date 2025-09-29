@@ -1,3 +1,4 @@
+import { showDialogue } from "../helper/dialogueChanger";
 const baristaFollowUp = [
   {
     id: "player_asks_barista",
@@ -21,16 +22,20 @@ const baristaFollowUp = [
     ],
   },
 ];
-function handleStartBugs({ state: applicationState }) {
-  console.log("startBugs");
-  if (applicationState === "inital") {
+function handleStarBugs({ state: applicationState }) {
+  console.log("starBugs");
+  console.log(applicationState);
+
+  if (applicationState === "initial") {
+    showDialogue("starbugs", "initial");
   }
   if (applicationState === "progress") {
     window.startStory(baristaFollowUp);
-
+    console.log(applicationState);
   }
   if (applicationState === "completed") {
+    showDialogue("starbugs", "completed");
   }
 }
 
-export default handleStartBugs;
+export default handleStarBugs;

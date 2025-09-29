@@ -1,3 +1,5 @@
+import { showDialogue } from "../helper/dialogueChanger";
+
 const knightFollowUp = [
   {
     id: "player_asks_knight",
@@ -23,12 +25,14 @@ const knightFollowUp = [
 ];
 function handleKnightClick({ state: applicationState }) {
   console.log("knight");
-  if (applicationState === "inital") {
+  if (applicationState === "initial") {
+    showDialogue("knight", "initial");
   }
   if (applicationState === "progress") {
     window.startStory(knightFollowUp);
   }
   if (applicationState === "completed") {
+    showDialogue("knight", "completed");
   }
 }
 

@@ -7,7 +7,6 @@ import Bush3 from "./assets/Bush3";
 import Bush4 from "./assets/Bush4";
 import Calm from "./assets/Calm";
 import Panic from "./assets/Panic";
-import StarBugs from "./assets/StarBugs";
 import Boat from "./assets/Boat";
 import Thief from "./assets/Thief";
 import handleThiefClick from "./game/handleThief";
@@ -16,7 +15,7 @@ import passGlobalState from "./helper/passGlobalState";
 import handleCocopheusClick from "./game/handleCocopheusClick";
 import handleFisherClick from "./game/handleFisherClick";
 import handleKnightClick from "./game/handleKnightClick";
-import handleStartBugs from "./game/handleStartBugs";
+import handleStarBugs from "./game/handleStarBugs";
 import handleFinderClick from "./game/handleFinderClick";
 import handleWorkerClick from "./game/handleWorkerClick";
 import handleGunManClick from "./game/handleGunManClick";
@@ -24,9 +23,14 @@ import handleMusicClick from "./game/handleMusicClick";
 import handleSipperClick from "./game/handleSipperClick";
 import handleFleaClick from "./game/handleFleaClick";
 import StoryTeller from "./StoryTeller";
-import { initialDialogueConfig } from "./assets/dialogue";
+import handleStarfishClick from "./game/handleStarfishClick";
+import handleShellsClick from "./game/handleShellsClick";
+import handleBoatClick from "./game/handleBoatClick";
+import handleStonesClick from "./game/handleStonesClick";
+import handleNewspaperClick from "./game/handleNewspaperClick";
+import handleSurferClick from "./game/handleSurferClick";
 
-const html = StarBugs() + Panic() + Calm() + Boat();
+const html = Panic() + Calm() + Boat();
 const storyTeller = new StoryTeller();
 window.storyTeller = storyTeller;
 export function startStory(storyData) {
@@ -36,7 +40,15 @@ export function startStory(storyData) {
 window.startStory = startStory;
 
 const bushHtml = `<div id="info-container"></div>
-<div id="bush-container">${Array.from({ length: 6 }, (_, id) => Bush1(id)).join("")}${Bush2()}${Bush3()}${Bush4()}${Thief(handleThiefClick)}</div>`;
+<div id="bush-container">${Array.from({ length: 6 }, (_, id) => Bush1(id)).join("")}
+${Bush2()}
+${Bush3()}
+${Bush4()}
+<div class="image-container absolute" id="thief-container">
+        ${Thief()}
+</div>
+
+</div>`;
 
 const images = [
   { id: "finder", path: "/som/find.png" },
@@ -53,33 +65,16 @@ const images = [
   { id: "music", path: "/som/music-guy.png" },
   { id: "flea", path: "/som/flea.png" },
   { id: "cocopheus", path: "/som/cocopheus.png" },
+  { id: "starbugs", path: "/image/StarBuckup.svg" },
+  // { id: "thief", path: "/image/Thief.svg" },
 ];
-let applicationState = { state: "inital" };
-
-
-// Create dialogue bubble HTML
-function createDialogueBubble(id, config) {
-  return `
-    <div class="dialogue-bubble" id="${id}-bubble" style="
-      top: ${config.position.top};
-      right: ${config.position.right};
-      transform: translateX(59%);
-    ">
-   ${config.text}
-    </div>
-  `;
-}
-
+let applicationState = { state: "initial" };
 
 const imgHTML = images
   .map((img) => {
-    const dialogueBubble = initialDialogueConfig[img.id]
-      ? createDialogueBubble(img.id, dialogueConfig[img.id])
-      : "";
     return `
       <div class="image-container absolute" id="${img.id}-container">
         <img class="image" id="${img.id}" src="${img.path}"/>
-        ${dialogueBubble}
       </div>
     `;
   })
@@ -117,7 +112,6 @@ setTimeout(() => {
   // Show main content
   setTimeout(() => {
     document.querySelector("#app").innerHTML = `${html} ${imgHTML} ${bushHtml}`;
-    setupDialogueSystem();
     addListeners();
   }, 500); // Wait for fade out animation
 }, 2000); // Show loading for 2 seconds
@@ -136,7 +130,11 @@ function addListeners() {
   const sipper = document.getElementById("sipper");
   const music = document.getElementById("music");
   const flea = document.getElementById("flea");
-
+  const boat = document.getElementById("boat");
+  const shells = document.getElementById("shells");
+  const starfish = document.getElementById("starfish");
+  const stones = document.getElementById("stones");
+  const newspaper = document.getElementById("newspaper");
   finder.addEventListener(
     "click",
     passGlobalState(handleFinderClick, applicationState),
@@ -147,7 +145,7 @@ function addListeners() {
   );
   surfer.addEventListener(
     "click",
-    passGlobalState(handleChallenge, applicationState),
+    passGlobalState(handleSurferClick, applicationState),
   );
   knight.addEventListener(
     "click",
@@ -163,7 +161,7 @@ function addListeners() {
   );
   starbugs.addEventListener(
     "click",
-    passGlobalState(handleStartBugs, applicationState),
+    passGlobalState(handleStarBugs, applicationState),
   );
 
   theif.addEventListener(
@@ -190,5 +188,25 @@ function addListeners() {
   flea.addEventListener(
     "click",
     passGlobalState(handleFleaClick, applicationState),
+  );
+  starfish.addEventListener(
+    "click",
+    passGlobalState(handleStarfishClick, applicationState),
+  );
+  shells.addEventListener(
+    "click",
+    passGlobalState(handleShellsClick, applicationState),
+  );
+  boat.addEventListener(
+    "click",
+    passGlobalState(handleBoatClick, applicationState),
+  );
+  stones.addEventListener(
+    "click",
+    passGlobalState(handleStonesClick, applicationState),
+  );
+  newspaper.addEventListener(
+    "click",
+    passGlobalState(handleNewspaperClick, applicationState),
   );
 }

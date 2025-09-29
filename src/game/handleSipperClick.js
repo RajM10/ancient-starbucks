@@ -1,3 +1,5 @@
+import { showDialogue } from "../helper/dialogueChanger";
+
 const sipperFollowUp = [
   {
     id: "player_asks_sipper",
@@ -24,12 +26,14 @@ const sipperFollowUp = [
 ];
 function handleSipperClick({ state: applicationState }) {
   console.log(`handleSipperClick `);
-  if (applicationState === "inital") {
+  if (applicationState === "initial") {
+    showDialogue("sipper", "initial");
   }
   if (applicationState === "progress") {
     window.startStory(sipperFollowUp);
   }
   if (applicationState === "completed") {
+    showDialogue("sipper", "completed");
   }
 }
 
